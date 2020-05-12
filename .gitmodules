@@ -1,0 +1,6 @@
+[submodule "emotion-recognition"]
+	path = emotion-recognition
+	url = https://github.com/Cabemo/emotion-classifier.git
+[submodule "emotionfy"]
+	path = emotionfy
+	url = git@github.com:robtry/emotionfy.git
