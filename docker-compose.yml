@@ -4,18 +4,18 @@ services:
   api:
     image: robtry/emotionapi
     container_name: emotion-api
-    build: 
-      context: ./emotion-recognition
-      dockerfile: Dockerfile
+    # build: 
+    #   context: ./emotion-recognition
+    #   dockerfile: Dockerfile
     volumes:
       - ./emotion-recognition:/app/
   # CLIENT
   client:
     image: cabemo/emotionfy
     container_name: emotionfy
-    build:
-      context: ./emotionfy
-      dockerfile: Dockerfile.dev
+    # build:
+    #   context: ./emotionfy
+    #   dockerfile: Dockerfile.dev
     volumes: 
       - /app/node_modules
       - ./emotionfy:/app
@@ -25,9 +25,9 @@ services:
     image: cabemo/emotion-nginx
     container_name: emotion-nginx
     restart: always
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile.dev
+    # build:
+    #   context: ./nginx
+    #   dockerfile: Dockerfile.dev
     ports:
       - 3050:80
     depends_on:
