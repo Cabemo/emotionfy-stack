@@ -2,6 +2,8 @@
 
 ## Docker
 
+### Setup
+
 Para correr utilizamos docker-compose de la siguiente manera:
 
 ```bash
@@ -15,6 +17,13 @@ git submodule update
 docker-compose build
 # Run it!
 docker-compose up
+```
+
+### Clean up
+
+```bash
+rm -rf emotionfy-stack
+docker rmi -f cabemo/emotionfy cabemo/emotion-nginx robtry/emotionapi
 ```
 
 Hay que ingresar a la dirección `localhost:3050`. La estructura es la siguiente:
