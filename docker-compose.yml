@@ -1,35 +1,48 @@
 version: "3"
 services:
-  # API
+  # EXPRESS: 5000
   api:
-    image: robtry/emotionapi
-    container_name: emotion-api
-    # build: 
-    #   context: ./emotion-recognition
-    #   dockerfile: Dockerfile
+    build: 
+      context: ./emotionfy-api
+      dockerfile: Dockerfile
+    image: cabemo/emotionfy-api
+    container_name: emotionfy-api
+    volumes:
+      - ./emotionfy-api:/app
+  # PYTHON: 8000
+  python-api:
+    build:
+      context: ./emotion-recognition
+      dockerfile: .
+    image: cabemo/emotionfy-python-api
+    container_name: emotionfy-python
+    build: 
+      context: ./emotion-recognition
+      dockerfile: Dockerfile
     volumes:
       - ./emotion-recognition:/app/
-  # CLIENT
+  # CLIENT: 3000
   client:
     image: cabemo/emotionfy
     container_name: emotionfy
-    # build:
-    #   context: ./emotionfy
-    #   dockerfile: Dockerfile.dev
+    build:
+      context: ./emotionfy
+      dockerfile: Dockerfile.dev
     volumes: 
       - /app/node_modules
       - ./emotionfy:/app
     stdin_open: true
   # NGINX
   nginx:
-    image: cabemo/emotion-nginx
-    container_name: emotion-nginx
+    image: cabemo/emotionfy-nginx
+    container_name: emotionfy-nginx
     restart: always
-    # build:
-    #   context: ./nginx
-    #   dockerfile: Dockerfile.dev
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
     ports:
       - 3050:80
     depends_on:
       - api
+      - python-api
       - client

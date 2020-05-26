@@ -4,3 +4,6 @@
 [submodule "emotionfy"]
 	path = emotionfy
 	url = git@github.com:robtry/emotionfy.git
+[submodule "emotionfy-api"]
+	path = emotionfy-api
+	url = git@github.com:Cabemo/emotionfy-api.git
