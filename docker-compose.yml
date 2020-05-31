@@ -1,26 +1,19 @@
 version: "3"
 services:
+  # # REDIS
+  # redis:
+  #   image: redis
+  #   container_name: emotionfy-redis
   # EXPRESS: 5000
   api:
     build: 
       context: ./emotionfy-api
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     image: cabemo/emotionfy-api
+    env_file: ./emotionfy-api/.env
     container_name: emotionfy-api
     volumes:
-      - ./emotionfy-api:/app
-  # PYTHON: 8000
-  python-api:
-    build:
-      context: ./emotion-recognition
-      dockerfile: .
-    image: cabemo/emotionfy-python-api
-    container_name: emotionfy-python
-    build: 
-      context: ./emotion-recognition
-      dockerfile: Dockerfile
-    volumes:
-      - ./emotion-recognition:/app/
+      - ./node_modules
   # CLIENT: 3000
   client:
     image: cabemo/emotionfy
@@ -30,8 +23,14 @@ services:
       dockerfile: Dockerfile.dev
     volumes: 
       - /app/node_modules
-      - ./emotionfy:/app
     stdin_open: true
+  # PYTHON: 8000
+  pyapi:
+    image: robtry/emotionapi
+    container_name: emotionfy-python
+    # build:
+    #   context: ./emotion-recognition
+    #   dockerfile: .
   # NGINX
   nginx:
     image: cabemo/emotionfy-nginx
@@ -44,5 +43,5 @@ services:
       - 3050:80
     depends_on:
       - api
-      - python-api
+      - pyapi
       - client

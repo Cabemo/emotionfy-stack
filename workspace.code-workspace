@@ -1,0 +1,21 @@
+{
+	
+	"folders": [
+		{
+			"path": "emotionfy-api"
+		},
+		{
+			"path": "emotionfy"
+		},
+		{
+			"path": "emotion-recognition"
+		},
+		{
+			"path": "nginx"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}
